@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: KCHAT_BOOTSTRAP_ADDRESS
-          value: kafka-0.broker.kafka:9092,kafka-1.broker.kafka:9092,kafka-2.broker.kafka:9092
+          value: kafka-0.broker.kafka:9092,kafka-1.broker.kafka:9092,kafka-2.broker.kafka:9092,kafka-3.broker.kafka:9092
         ports:
         - containerPort: 19092
           name: kproducer
