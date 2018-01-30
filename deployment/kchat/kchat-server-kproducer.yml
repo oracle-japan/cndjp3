@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kchat-server-kproducer
+spec:
+  selector:
+    app: kproducer
+  ports:
+  - protocol: TCP
+    port: 19092 
+    targetPort: 19092
+    nodePort: 30192
+  type: NodePort
+---
+apiVersion: apps/v1beta1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: kchat-server-kproducer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kproducer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kproducer
+    spec:
+      containers:
+      - image: hhayakaw/kchat.server.kproducer:0.1
+        name: kproducer
+        imagePullPolicy: Always
+        env:
+        - name: KCHAT_BOOTSTRAP_ADDRESS
+          value: kafka-0.broker.kafka:9092,kafka-1.broker.kafka:9092,kafka-2.broker.kafka:9092
+        ports:
+        - containerPort: 19092
+          name: kproducer
