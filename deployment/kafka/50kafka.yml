@@ -5,7 +5,7 @@ metadata:
   namespace: kafka
 spec:
   serviceName: "broker"
-  replicas: 3
+  replicas: 4
   template:
     metadata:
       labels:
